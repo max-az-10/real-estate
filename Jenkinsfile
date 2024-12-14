@@ -34,8 +34,7 @@ pipeline {
 						//docker build -t ${ECR_REPO}:${IMAGE_TAG} .
 	     					//docker tag ${ECR_REPO}:${IMAGE_TAG} ${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}
 						"""
-					}
-				}	
+					}	
 			}
 		}
 		stage('Trivy scan') {
