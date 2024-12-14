@@ -28,12 +28,14 @@ pipeline {
 		}
 		stage('Build & Tag image') {
 			steps {
-				withCredentials([usernamePassword(credentialsId: 'Aws_cred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
-					sh """
-					docker build -t ${ECR_REPO}:${IMAGE_TAG} .
-     					docker tag ${ECR_REPO}:${IMAGE_TAG} ${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}
-					"""
-				}
+				withCredentials([usernamePassword(credentialsId: 'Aws_cred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {	
+					script {
+						sh """
+						docker build -t ${ECR_REPO}:${IMAGE_TAG} .
+	     					docker tag ${ECR_REPO}:${IMAGE_TAG} ${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}
+						"""
+					}
+				}	
 			}
 		}
 		stage('Trivy scan') {
@@ -49,6 +51,7 @@ pipeline {
 					script {
 						sh """
 						aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ECR_REGISTRY
+      						aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 381492139836.dkr.ecr.us-west-2.amazonaws.com
                         			docker push $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
 	    					"""
 					}
