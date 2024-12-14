@@ -31,8 +31,9 @@ pipeline {
 				withCredentials([usernamePassword(credentialsId: 'Aws_cred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {	
 					script {
 						sh """
-						docker build -t ${ECR_REPO}:${IMAGE_TAG} .
-	     					docker tag ${ECR_REPO}:${IMAGE_TAG} ${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}
+      						docker build -t real-estate-repo .
+						//docker build -t ${ECR_REPO}:${IMAGE_TAG} .
+	     					//docker tag ${ECR_REPO}:${IMAGE_TAG} ${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}
 						"""
 					}
 				}	
