@@ -27,8 +27,7 @@ pipeline {
 			}	
 		}
 		stage('Build & Tag image') {
-			steps {
-				withCredentials([usernamePassword(credentialsId: 'Aws_cred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {	
+			steps {	
 					script {
 						sh """
       						docker build -t real-estate-repo .
