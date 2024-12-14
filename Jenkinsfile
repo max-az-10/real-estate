@@ -52,19 +52,8 @@ pipeline {
                         			docker push $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG
 	    					"""
 					}
+				}
 			}
-		}
+		}		
 	}		
-}		
-		/*stage('Update services in ECS') {
-		        steps {
-		                withCredentials([usernamePassword(credentialsId: 'Aws_cred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {   
-			             	script {       
-						sh """
-				                aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --task-definition $ECS_TASK_DEF --force-new-deployment
-				                """
-		                	}
-		        	}
-        		}
-		*/}
 }
